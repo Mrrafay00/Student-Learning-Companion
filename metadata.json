@@ -1,0 +1,5 @@
+{
+  "name": "Student Learning Companion",
+  "description": "A multi-agent AI learning platform optimized for low-resource settings, offering personalized curriculum-aligned support with offline capabilities.",
+  "requestFramePermissions": []
+}
