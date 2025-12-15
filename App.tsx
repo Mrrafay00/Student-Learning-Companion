@@ -251,7 +251,7 @@ export default function App() {
   const availableCourses = getCoursesForSource(selectedSource);
 
   return (
-    <div className={`h-screen w-full flex overflow-hidden ${state.isLowBandwidth ? 'font-mono bg-white' : 'font-sans bg-slate-50'}`}>
+    <div className={`h-screen w-full flex overflow-hidden ${state.isLowBandwidth ? 'font-mono bg-white' : 'font-sans theme-animated'}`}>
       
       {/* Sidebar / Agent Trace */}
       <div className="w-1/3 md:w-1/4 h-full hidden md:block">
@@ -262,17 +262,17 @@ export default function App() {
       <div className="flex-1 flex flex-col h-full relative">
         
         {/* Header */}
-        <header className={`p-4 flex justify-between items-center ${state.isLowBandwidth ? 'border-b-2 border-black' : 'bg-white shadow-sm z-10'}`}>
+        <header className={`p-4 flex justify-between items-center ${state.isLowBandwidth ? 'border-b-2 border-black' : 'bg-white/80 backdrop-blur-sm shadow-sm z-10'}`}>
           <div>
             <h1 className={`text-xl font-bold ${state.isLowBandwidth ? 'uppercase' : 'text-slate-800'}`}>
               Student Companion
             </h1>
             {state.session && (
                <div className="flex flex-wrap gap-2 text-xs mt-1">
-                 <span className={`${state.isLowBandwidth ? 'border border-black px-1' : 'bg-slate-100 px-2 py-0.5 rounded text-slate-600'}`}>
+                 <span className={`${state.isLowBandwidth ? 'border border-black px-1' : 'bg-slate-100/80 px-2 py-0.5 rounded text-slate-600'}`}>
                    {state.session.courseName}
                  </span>
-                 <span className={`${state.isLowBandwidth ? 'border border-black px-1' : 'bg-blue-100 px-2 py-0.5 rounded text-blue-700 font-bold'}`}>
+                 <span className={`${state.isLowBandwidth ? 'border border-black px-1' : 'bg-blue-100/80 px-2 py-0.5 rounded text-blue-700 font-bold'}`}>
                    Mastery: {state.session.masteryScore}%
                  </span>
                </div>
@@ -282,14 +282,14 @@ export default function App() {
           <div className="flex gap-3">
              <button 
               onClick={() => dispatch({type: 'TOGGLE_BANDWIDTH'})}
-              className={`px-3 py-1 text-xs font-bold border ${state.isLowBandwidth ? 'bg-black text-white border-black' : 'bg-white border-slate-300 text-slate-600 rounded hover:bg-slate-50'}`}
+              className={`px-3 py-1 text-xs font-bold border transition-colors ${state.isLowBandwidth ? 'bg-black text-white border-black' : 'bg-white/80 border-slate-300 text-slate-600 rounded hover:bg-white'}`}
              >
                {state.isLowBandwidth ? 'Standard' : 'Low BW'}
              </button>
              {state.session && (
                <button 
                 onClick={downloadPack}
-                className={`px-3 py-1 text-xs font-bold border ${state.isLowBandwidth ? 'bg-white text-black border-black' : 'bg-emerald-600 border-emerald-600 text-white rounded hover:bg-emerald-700'}`}
+                className={`px-3 py-1 text-xs font-bold border transition-colors ${state.isLowBandwidth ? 'bg-white text-black border-black' : 'bg-emerald-600 border-emerald-600 text-white rounded hover:bg-emerald-700'}`}
                >
                  Export Pack
                </button>
@@ -303,8 +303,8 @@ export default function App() {
           {/* IDLE STATE */}
           {state.currentStep === 'idle' && (
             <div className="max-w-md mx-auto mt-10 md:mt-20 text-center">
-              <div className={`mb-8 p-6 ${state.isLowBandwidth ? 'border-2 border-black' : 'bg-white rounded-xl shadow-lg border border-slate-100'}`}>
-                <h2 className="text-2xl font-bold mb-4">Start Learning</h2>
+              <div className={`mb-8 p-6 ${state.isLowBandwidth ? 'border-2 border-black' : 'bg-white/90 backdrop-blur-md rounded-xl shadow-xl border border-white/50'}`}>
+                <h2 className="text-2xl font-bold mb-4 bg-gradient-to-r from-blue-600 to-indigo-600 bg-clip-text text-transparent">Start Learning</h2>
                 <p className="text-slate-500 mb-6 text-sm">
                   Select your board and course to begin your personalized session.
                 </p>
@@ -319,7 +319,7 @@ export default function App() {
                         setSelectedSource(e.target.value);
                         setSelectedCourse(''); // Reset course when source changes
                       }}
-                      className={`w-full p-2 outline-none ${state.isLowBandwidth ? 'border-2 border-black' : 'border border-slate-300 rounded focus:border-blue-500 bg-white'}`}
+                      className={`w-full p-2 outline-none ${state.isLowBandwidth ? 'border-2 border-black' : 'border border-slate-200 rounded-lg focus:ring-2 focus:ring-blue-500 bg-slate-50/50'}`}
                     >
                       <option value="">-- Select Board --</option>
                       {sources.map(source => (
@@ -335,7 +335,7 @@ export default function App() {
                       value={selectedCourse}
                       onChange={(e) => setSelectedCourse(e.target.value)}
                       disabled={!selectedSource}
-                      className={`w-full p-2 outline-none ${state.isLowBandwidth ? 'border-2 border-black' : 'border border-slate-300 rounded focus:border-blue-500 bg-white'} ${!selectedSource ? 'bg-slate-100 text-slate-400' : ''}`}
+                      className={`w-full p-2 outline-none ${state.isLowBandwidth ? 'border-2 border-black' : 'border border-slate-200 rounded-lg focus:ring-2 focus:ring-blue-500 bg-slate-50/50'} ${!selectedSource ? 'bg-slate-100 text-slate-400' : ''}`}
                     >
                       <option value="">-- Select Course --</option>
                       {availableCourses.map(course => (
@@ -350,7 +350,7 @@ export default function App() {
                       type="text"
                       value={topicInput}
                       onChange={(e) => setTopicInput(e.target.value)}
-                      className={`w-full p-2 outline-none ${state.isLowBandwidth ? 'border-2 border-black' : 'border border-slate-300 rounded focus:border-blue-500'}`}
+                      className={`w-full p-2 outline-none ${state.isLowBandwidth ? 'border-2 border-black' : 'border border-slate-200 rounded-lg focus:ring-2 focus:ring-blue-500 bg-slate-50/50'}`}
                       placeholder="e.g. Photosynthesis, Algebra"
                     />
                   </div>
@@ -358,9 +358,9 @@ export default function App() {
                   <button 
                     onClick={handleStart}
                     disabled={!selectedCourse || !topicInput}
-                    className={`w-full mt-4 px-6 py-3 font-bold transition-all
+                    className={`w-full mt-4 px-6 py-3 font-bold transition-all transform hover:scale-[1.02]
                       ${!selectedCourse || !topicInput ? 'opacity-50 cursor-not-allowed' : 'opacity-100'}
-                      ${state.isLowBandwidth ? 'bg-black text-white hover:bg-slate-800' : 'bg-blue-600 text-white rounded hover:bg-blue-700 shadow-lg'}`}
+                      ${state.isLowBandwidth ? 'bg-black text-white hover:bg-slate-800' : 'bg-gradient-to-r from-blue-600 to-indigo-600 text-white rounded-lg shadow-lg hover:shadow-xl'}`}
                   >
                     Start Session
                   </button>
@@ -375,11 +375,11 @@ export default function App() {
 
           {/* LOADING STATE */}
           {state.isLoading && (
-            <div className="absolute inset-0 flex flex-col items-center justify-center bg-white/80 z-50">
+            <div className="absolute inset-0 flex flex-col items-center justify-center bg-white/60 backdrop-blur-sm z-50">
                <div className={`w-16 h-16 mb-4 ${state.isLowBandwidth ? 'border-4 border-black border-t-transparent animate-spin rounded-full' : 'animate-bounce text-4xl'}`}>
                   {state.isLowBandwidth ? '' : '🤖'}
                </div>
-               <p className="font-mono text-sm animate-pulse">Agents are coordinating...</p>
+               <p className="font-mono text-sm animate-pulse text-slate-600">Agents are coordinating...</p>
             </div>
           )}
 
