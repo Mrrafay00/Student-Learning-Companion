@@ -36,6 +36,19 @@
           -ms-overflow-style: none;
           scrollbar-width: none;
       }
+
+      /* Animated Background Theme */
+      .theme-animated {
+        background: linear-gradient(-45deg, #e0f2fe, #f0fdf4, #fdf4ff, #eff6ff, #f0f9ff);
+        background-size: 400% 400%;
+        animation: gradientBG 20s ease infinite;
+      }
+      
+      @keyframes gradientBG {
+        0% { background-position: 0% 50%; }
+        50% { background-position: 100% 50%; }
+        100% { background-position: 0% 50%; }
+      }
     </style>
   <script type="importmap">
 {
